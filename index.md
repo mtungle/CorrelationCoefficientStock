@@ -1,7 +1,12 @@
 
-
-Introduction: This is the introduction.
-This the next line.
+# Header 1
+Text.
+### Header 2
+Lorem?
+## Header 3
+Ipsum.
+# Last header
+Markdown rules!
 
 
 ```R
