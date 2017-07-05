@@ -35,8 +35,8 @@ colnames(price_matrix)<-unlist(string_dates)
 ```
 
 ## Correlation coefficient of stocks on the same business day
-
+some text
 ## Correlation coefficient of stocks on 1-day difference
-
+some other text
 
 
