@@ -21,6 +21,7 @@ ABU,20090102,0.016,0.016,0.015,0.015,500000
 ABY,20090102,0.15,0.19,0.15,0.175,2800449
 ```
 
+#Data preperation
 
 ```R
 df <- read.table("all.txt", header = FALSE,sep = ",")
@@ -33,15 +34,9 @@ rownames(price_matrix)<-unlist(string_company_codes)
 colnames(price_matrix)<-unlist(string_dates)
 ```
 
+#Correlation coefficient of stocks on the same business day
+
+#Correlation coefficient of stocks on 1-day difference
 
 
-
-    [1] 2
-
-
-
-
-```R
-
-```
 
