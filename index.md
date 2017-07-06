@@ -2,7 +2,10 @@
 # Correlation coefficient of Autralian stocks
 Text.
 
+All the files and R source code are available via my GitHub project.
 ## The data set
+
+The data is pulled directly from the official stock exchange at http://www.asx.com.au/. It is in the form of CSV files where the first column is the stock code, second column is the business day in integer form, the third column is the opening price. All other column including the maximum price, minimum price, closing price, and transaction volumn is off interest for this project. The data is collected from Jan 2009 to Mars 2017 for all of the stock has been listed on ASX. It is about 3000 different stocks trading for over 2000 business days.
 
 ```
 AAC,20090102,1.945,1.97,1.875,1.875,140313
@@ -20,19 +23,67 @@ ABP,20090102,0.215,0.235,0.19,0.205,3461719
 ABU,20090102,0.016,0.016,0.015,0.015,500000
 ABY,20090102,0.15,0.19,0.15,0.175,2800449
 ```
+Example of the data set.
 
 ## Data preperation
 
+We first need to read the raw data into the format that is executable in R. The function `read.table` which read CSV file into a data frame is shown below where `df` is the data frame name, and `all.txt` is our CSV file.
 ```R
 df <- read.table("all.txt", header = FALSE,sep = ",")
+```
+We note that each line of the data frame `df` is about one stock price at a single day. This data arrangement is not useful for our later analysis. It is better to re-arrange our data frame so that each line is about a single stock price for the entire trading period.
+
+We form a list of stock codes and a list of transaction days.
+
+```R
 company_codes<-unique(df$V1)
 dates<-unique(df$V2)
+```
+Then convert them to vectors of string.
+```R
 string_company_codes=strsplit(toString(company_codes),", ")
 string_dates=strsplit(toString(dates),", ")
+```
+Then initialise our `price_matrix`. Each line of this matrix has the price history of a single Austrlian stock from 2009 to 2017. In this setting, the missing data is treated with NA value.
+```R
 price_matrix<-matrix(data=NA,nrow=lengths(string_company_codes),ncol=lengths(string_dates))
+```
+Assign names of rows and column.
+```R
 rownames(price_matrix)<-unlist(string_company_codes)
 colnames(price_matrix)<-unlist(string_dates)
 ```
+
+Extract data from the data frame `df` to our matrix `price_matrix`.
+```R
+for (i in 1:nrow(df))
+{   
+   price_matrix[toString(df[i,1]),toString(df[i,2])]<-df[i,3]
+}
+```
+
+The size of our `price_matrix`
+```R
+dim(price_matrix)
+[1] 3551 2064
+```
+
+This is a small part of our `price_matrix`
+```R
+price_matrix[1:5,1:8]
+    20090102 20090105 20090106 20090107 20090108 20090109 20090112 20090113
+AAC    1.945    1.900    1.910     1.90    1.915    1.865     1.86    1.845
+AAH    0.835    0.850    0.825     0.84    0.825    0.830     0.83    0.840
+AAM    0.085    0.099    0.091       NA       NA       NA       NA    0.086
+AAO    0.022    0.025    0.025       NA       NA    0.028       NA    0.025
+AAQ    0.160    0.160    0.160     0.15    0.150    0.145       NA       NA
+```
+
+
+
+
+
+
 
 ## Correlation coefficient of stocks on the same business day
 some text
