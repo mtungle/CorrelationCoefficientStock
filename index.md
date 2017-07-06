@@ -1,8 +1,11 @@
 
 # Correlation coefficient of Autralian stocks
-Text.
+This small project attemps to calculate the correlation coefficients of common Australian stocks over the past few years. Lets assume each stock price is random variable, then the correlation coefficient between 2 stock prices measures the linear dependency between them. The correlation coefficient is just a number between -1 and 1 where: 0 means no correlation, i.e. knowing the change in price of one stock provides no information about the change in price of other stock; 1 means perfect possitive correlation, i.e. the two stocks have linear relation in the form `y=ax+b` where `a` is a positive number; -1 means perfect negative correlation, i.e. the two stocks have linear relation in the form `y=ax+b` where `a` is a negative number. A more detial explanation of correlation coefficient in finance context can be found in http://www.investopedia.com/terms/c/correlationcoefficient.asp.
 
-All the files and R source code are available via my GitHub project.
+The correlation coefficient of the stock prices is an important factor in portfolio management. Often to reduce risk of portfolio, it is recommended to diversify the invested assets. In this case, we should look for a set of stock which has low or negative number of correlation coefficient for each pair of stocks. If you are only interested in the results, you may want to jump in to the end of this article. The full correlation coefficient matrix, which is too large to display, is also available via my GitHub.
+
+A large part of this article is rather about how to get to the results. It contains step by step from data collection, data preparation, and calculation written in R.
+
 ## The data set
 
 The data is pulled directly from the official stock exchange at http://www.asx.com.au/. It is in the form of CSV files where the first column is the stock code, second column is the business day in integer form, the third column is the opening price. All other column including the maximum price, minimum price, closing price, and transaction volumn is off interest for this project. The data is collected from Jan 2009 to Mars 2017 for all of the stock has been listed on ASX. It is about 3000 different stocks trading for over 2000 business days.
@@ -120,12 +123,16 @@ Visualize the correlation matrix.
 ```R
 corrplot(correlation_matrix[1:15,1:30])
 ```
+The above table is a very small part of the full correlation coefficient matrix. Green means positive correlation and red means negative correlation. The diagonal represents the correlation coefficient of a stock with itself so it has all big blue circle of value `1`. We are mostly interested in other relation. For example, if we look at the row of ANZ, it has 2 big positive correlation with AMP and BEN which are all not surprisingly in the banking sector. An example of negative correlation is between ACR and ASL which are in different sector. Overal, the negative correlation is rare and could be an option to diversify the investing portfolio.
+
 
 ![Correlation matrix of same day stock price][logo1]
 
 [logo1]: https://mtungle.github.io/corMatrix_sameDay.jpeg
 
 ## Correlation coefficient of stocks on 1-day difference
+
+In this section, we look at the correlation coefficient of stocks between 2 business days. We try to figure out if there is any linear relation between stock price today and the stock price tomorrow. The whole process is almost the same except a small twist in how to calculate `changedPriceData` matrix. 
 
 Calculate the correlation matrix.
 ```R
@@ -142,5 +149,5 @@ Visualize the correlation matrix.
 ![Correlation matrix of 1 day different stock price][logo2]
 
 [logo2]: https://mtungle.github.io/corMatrix_1DayDelay.jpeg
-
+Just by looking a this table, we can say with high certainty that there is no linear relation of stock price over the next business day.
 
