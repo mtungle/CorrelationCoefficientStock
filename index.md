@@ -98,6 +98,13 @@ So our final clean data set is the stock price of 441 companies for over 3 years
 ## Correlation coefficient of stocks on the same business day
 Now come to the fun part where we actually calculate the dependency of the stocks. We first look at the correlation coefficient of the stock price in the same business day.
 
+Calculate the price differency matrix.
+```R
+changedPriceData<-priceData[,2:565]
+changedPriceData<-changedPriceData-priceData[,1:564]
+```
+
+Calculate the correlation matrix.
 ```R
 correlation_matrix <- matrix(data=NA,nrow=441,ncol=441)
 for(i in 1:441)
@@ -110,6 +117,9 @@ for(i in 1:441)
 ```
 
 Visualize the correlation matrix.
+```R
+corrplot(correlation_matrix[1:15,1:30])
+```
 
 ![Correlation matrix of same dat stock price][logo]
 
