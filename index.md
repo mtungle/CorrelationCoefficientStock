@@ -121,11 +121,13 @@ Visualize the correlation matrix.
 corrplot(correlation_matrix[1:15,1:30])
 ```
 
-![Correlation matrix of same dat stock price][logo]
+![Correlation matrix of same day stock price][logo1]
 
-[logo]: https://mtungle.github.io/corMatrix_sameDay.jpeg
+[logo1]: https://mtungle.github.io/corMatrix_sameDay.jpeg
 
 ## Correlation coefficient of stocks on 1-day difference
-some other text
+![Correlation matrix of 1 day different stock price][logo2]
+
+[logo2]: https://mtungle.github.io/corMatrix_1DayDelay.jpeg
 
 
