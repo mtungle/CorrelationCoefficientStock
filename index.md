@@ -79,14 +79,39 @@ AAO    0.022    0.025    0.025       NA       NA    0.028       NA    0.025
 AAQ    0.160    0.160    0.160     0.15    0.150    0.145       NA       NA
 ```
 
+Now we have 2 problems, the first is that our `price_matrix` is perhaps too big for my persional laptop so we may want to reduce the size of the `price_matrix`. However, if you have a faster computer, feel free to run it at full scale. The second problem is the missing data `NA` is not helpful to calculate our correlation coefficient. We want to eliminate the stock codes that have too many NA entries, say more than 10 `NA` is our data set.
 
+```R
+recent_price_matrix<-price_matrix[,1500:2064]
+numNA<-rowSums(is.na(recent_price_matrix))
+index_selector<-numNA<10
+priceData=recent_price_matrix[index_selector,]
+```
 
-
-
-
+The size of our new `priceData`.
+```R
+dim(priceData)
+[1] 441 565
+```
+So our final clean data set is the stock price of 441 companies for over 3 years of trading.
 
 ## Correlation coefficient of stocks on the same business day
-some text
+Now come to the fun part where we actually calculate the dependency of the stocks. We first look at the correlation coefficient of the stock price in the same business day.
+
+```R
+correlation_matrix <- matrix(data=NA,nrow=441,ncol=441)
+for(i in 1:441)
+{
+  for(j in 1:441)
+  {
+    correlation_matrix[i,j]=cor(changedPriceData[i,],changedPriceData[j,],use = "complete.obs")}}
+  } 
+}
+```
+
+Visualize the correlation matrix.
+
+
 ## Correlation coefficient of stocks on 1-day difference
 some other text
 
