@@ -9,7 +9,7 @@ A large part of this article is rather about how to get to the results. It conta
 
 ## About the author
 
-I am looking for an entry level job as a data analyst. If you like what I do here and fancy about me working for you, you can contact me on my email mtungle@gmail.com or my linked in https://www.linkedin.com/in/tung-le-55564972/. 
+I am looking for an entry level job as a data analyst. If you like what I do here and fancy about me working for you, you can contact me on my email `mtungle@gmail.com` or my linked in `https://www.linkedin.com/in/tung-le-55564972/`. 
 
 
 ## The data set
