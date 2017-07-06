@@ -113,7 +113,7 @@ Visualize the correlation matrix.
 
 ![alt text][logo]
 
-[logo]: mtungle.github.io/corMatrix_sameDay.jpeg
+[logo]: https://mtungle.github.io/corMatrix_sameDay.jpeg
 
 ## Correlation coefficient of stocks on 1-day difference
 some other text
