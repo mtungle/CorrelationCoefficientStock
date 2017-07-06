@@ -126,6 +126,19 @@ corrplot(correlation_matrix[1:15,1:30])
 [logo1]: https://mtungle.github.io/corMatrix_sameDay.jpeg
 
 ## Correlation coefficient of stocks on 1-day difference
+
+Calculate the correlation matrix.
+```R
+correlation_matrix_1delay <- matrix(data=NA,nrow=441,ncol=441)
+for(i in 1:441)
+{
+  for(j in 1:441)
+  {
+    correlation_matrix[i,j]= a[i,j]=cor(changedPriceData[i,1:563],changedPriceData[j,2:564],use = "complete.obs")}}
+  }
+}
+```
+Visualize the correlation matrix.
 ![Correlation matrix of 1 day different stock price][logo2]
 
 [logo2]: https://mtungle.github.io/corMatrix_1DayDelay.jpeg
