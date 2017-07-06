@@ -111,7 +111,7 @@ for(i in 1:441)
 
 Visualize the correlation matrix.
 
-![alt text][logo]
+![Correlation matrix of same dat stock price][logo]
 
 [logo]: https://mtungle.github.io/corMatrix_sameDay.jpeg
 
