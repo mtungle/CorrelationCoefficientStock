@@ -2,20 +2,20 @@
 # Correlation coefficient of Autralian stocks
 07 Jul 2017
 
-This small project attempts to calculate the correlation coefficients of common Australian stocks over the past few years. Let's assume each stock price is random variable, and then the correlation coefficient between 2 stock prices measures the linear dependency between them. The correlation coefficient is just a number between -1 and 1 where: 0 means no correlation, i.e. knowing the change in price of one stock provides no information about the change in price of other stock; 1 means perfect positive correlation, i.e. the two stocks have linear relation in the form `y=ax+b` where `a` is a positive number; -1 means perfect negative correlation, i.e. the two stocks have linear relation in the form `y=ax+b` where `a` is a negative number. A more detail explanation of correlation coefficient in finance context can be found in http://www.investopedia.com/terms/c/correlationcoefficient.asp.
+This small project attempts to calculate the correlation coefficients of common Australian stocks over the past few years. Let's assume each stock price is a random variable, and then the correlation coefficient between 2 stock prices measures the linear dependency between them. The correlation coefficient is just a number between -1 and 1 where: 0 means no correlation, i.e. knowing the change in price of one stock provides no information about the change in price of other stock; 1 means perfect positive correlation, i.e. the two stocks have linear relation in the form `y=ax+b` where `a` is a positive number; -1 means perfect negative correlation, i.e. the two stocks have linear relation in the form `y=ax+b` where `a` is a negative number. A more detail explanation of correlation coefficient in finance context can be found in http://www.investopedia.com/terms/c/correlationcoefficient.asp.
 
-The correlation coefficient of the stock prices is an important factor in portfolio management. Often to reduce risk of portfolio, it is recommended to diversify the invested assets. In this case, we should look for a set of stock which has low or negative number of correlation coefficient for each pair of stocks. If you are only interested in the results, you may want to jump in to the end of this article. The full correlation coefficient matrix, which is too large to display, is also available via my GitHub.
+The correlation coefficient of the stock prices is an important factor in portfolio management. Often to reduce risk of portfolio, it is recommended to diversify the invested assets. In this case, we should look for a set of stocks which has low or negative number of correlation coefficient for each pair of stocks. If you are only interested in the results, you may want to jump to the end of this article. The full correlation coefficient matrix, which is too large to display, can be found via my GitHub.
 
 A large part of this article is rather about how to get to the results. It contains step by step from data collection, data preparation, and calculation written in R.
 
 ## About the author
 
-I am looking for an entry level job as a data analyst. If you like what I do here and fancy about me working for you, you can contact me on my email **mtungle@gmail.com** or my linked in **https://www.linkedin.com/in/tung-le-55564972/**. 
+I am looking for an entry level job as a data analyst. If you like what I do here and fancy about me working for you, you can contact me on my email **mtungle@gmail.com** or my LinkedIn **https://www.linkedin.com/in/tung-le-55564972/**. 
 
 
 ## The data set
 
-The data is pulled directly from the official stock exchange at http://www.asx.com.au/. It is in the form of CSV files where the first column is the stock code, second column is the business day in integer form, the third column is the opening price. All other column including the maximum price, minimum price, closing price, and transaction volume is off interest for this project. The data is collected from Jan 2009 to Mars 2017 for all of the stock has been listed on ASX. It is about 3000 different stocks trading for over 2000 business days.
+The data is pulled directly from the official stock exchange page at http://www.asx.com.au/. It is in the form of CSV files where the first column is the stock code, second column is the business day in integer form, the third column is the opening price. All other column including the maximum price, minimum price, closing price, and transaction volume is off interest for this project. The data is collected from Jan 2009 to Mars 2017 for all of the stock has been listed on ASX. It is about 3000 different stocks trading for over 2000 business days.
 
 ```
 AAC,20090102,1.945,1.97,1.875,1.875,140313
@@ -51,8 +51,8 @@ dates<-unique(df$V2)
 ```
 Then convert them to vectors of string.
 ```R
-string_company_codes=strsplit(toString(company_codes),", ")
-string_dates=strsplit(toString(dates),", ")
+string_company_codes<-strsplit(toString(company_codes),", ")
+string_dates<-strsplit(toString(dates),", ")
 ```
 Then initialise our `price_matrix`. Each line of this matrix has the price history of a single Australian stock from 2009 to 2017. In this setting, the missing data is treated with NA value.
 ```R
@@ -95,7 +95,7 @@ Now we have 2 problems, the first is that our `price_matrix` is perhaps too big 
 recent_price_matrix<-price_matrix[,1500:2064]
 numNA<-rowSums(is.na(recent_price_matrix))
 index_selector<-numNA<10
-priceData=recent_price_matrix[index_selector,]
+priceData<-recent_price_matrix[index_selector,]
 ```
 
 The size of our new `priceData`.
@@ -148,7 +148,7 @@ for(i in 1:441)
 {
   for(j in 1:441)
   {
-    correlation_matrix[i,j]= a[i,j]=cor(changedPriceData[i,1:563],changedPriceData[j,2:564],use = "complete.obs")}}
+    correlation_matrix[i,j]<- a[i,j]=cor(changedPriceData[i,1:563],changedPriceData[j,2:564],use = "complete.obs")}}
   }
 }
 ```
