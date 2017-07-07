@@ -1,5 +1,6 @@
 
 # Correlation coefficient of Autralian stocks
+07 Jul 2017
 
 This small project attempts to calculate the correlation coefficients of common Australian stocks over the past few years. Let's assume each stock price is random variable, and then the correlation coefficient between 2 stock prices measures the linear dependency between them. The correlation coefficient is just a number between -1 and 1 where: 0 means no correlation, i.e. knowing the change in price of one stock provides no information about the change in price of other stock; 1 means perfect positive correlation, i.e. the two stocks have linear relation in the form `y=ax+b` where `a` is a positive number; -1 means perfect negative correlation, i.e. the two stocks have linear relation in the form `y=ax+b` where `a` is a negative number. A more detail explanation of correlation coefficient in finance context can be found in http://www.investopedia.com/terms/c/correlationcoefficient.asp.
 
